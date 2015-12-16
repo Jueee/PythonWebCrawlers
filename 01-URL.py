@@ -4,6 +4,7 @@
 #encoding:UTF-8
 import urllib.request
 
+
 '''
 urllib.request.urlopen(url, data=None, [timeout, ]*, cafile=None, capath=None, cadefault=False)
 
@@ -33,8 +34,16 @@ if __name__ != '__main__':
         print(f.read().decode('utf-8'))
 
 # 用Python简单处理URL
+'''
+data是一个字典, 然后通过urllib.parse.urlencode()来将data转换为 ‘word=Jecvay+Notes’的字符串, 最后和url合并为full_url,
+'''
 if __name__=='__main__':
     data = {}
-    data['word'] = 'Jecyay Notes'
+    data['wd'] = 'ju  eee'
     url_values = urllib.parse.urlencode(data)
-    url = 'http://www.baidu.com'
+    url = 'http://www.baidu.com/s'
+    full_url = url + url_values
+    print(full_url)
+
+    data = urllib.request.urlopen(full_url).read()
+    print(data)
