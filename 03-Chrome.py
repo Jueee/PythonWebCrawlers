@@ -72,7 +72,7 @@ if __name__ != '__main__':
 第二种方法使用了 build_opener 这个方法, 用来自定义 opener, 这种方法的好处是可以方便的拓展功能.
 例如下面的代码就拓展了自动处理 Cookies 的功能.
 '''
-if __name__ == '__main__':
+if __name__ != '__main__':
     # head: dict of header
     def makeMyOpener(head = {
         'Connection': 'Keep-Alive',
@@ -96,9 +96,26 @@ if __name__ == '__main__':
 
 
 '''
+保存抓回来的报文
+
+Python 的文件操作还是相当方便的. 
+我们可以讲抓回来的数据 data 以二进制形式保存, 也可以经过 decode() 处理成为字符串后以文本形式保存. 
+改动一下打开文件的方式就能用不同的姿势保存文件了. 
+下面是参考代码:
+'''
+def saveFile(data):
+    save_path = 'result\\01-Study\\study.txt'
+    f_obj = open(save_path, 'a') # wb 表示打开方式
+    f_obj.write(data)
+    f_obj.close()
+
 
 '''
-if __name__!='__main__':
+
+'''
+if __name__=='__main__':
+    result = ''
+
     data = urllib.request.urlopen('http://baidu.com').read()
     print(data)
     
@@ -115,14 +132,14 @@ if __name__!='__main__':
         url = queue.popleft()   # 队首元素出队
         visited |= {url}        # 标记为已访问
     
-        print('已经抓取：'+str(cnt)+'正在抓取<---'+url)
+        result += '已经抓取：'+str(cnt)+'正在抓取<---'+url + '\n'
     
         req = urllib.request.Request(url)
         req.add_header('User-Agent', 'Mozilla/6.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/8.0 Mobile/10A5376e Safari/8536.25')
     
         cnt += 1
         try:
-            urlop = urllib.request.urlopen(req, timeout = 2)
+            urlop = urllib.request.urlopen(req, timeout = 2000)
         except:
             continue
         
@@ -141,5 +158,6 @@ if __name__!='__main__':
         for x in linkre.findall(data):
             if 'http' in x and x not in visited:
                 queue.append(x)
-                print('加入队列 --->  ' + x)
-
+                result += '加入队列 --->  ' + x + '\n'
+    print(result)
+    saveFile(result)
