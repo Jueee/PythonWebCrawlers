@@ -114,19 +114,19 @@ data = ungzip(data)
 _xsrf = getXSRF(data.decode())
 print(_xsrf)
 
-url += '/login/email'
+url += 'login/email'
 id = '921550356@qq.com'
 password = 'aa'
 postDict = {
-    '_xsrf':_xsrf,
+    '_xsrf':'2dfc9ed9eb9bfd4bd8d89903272708df',
     'email':id,
     'password':password,
     'remember_me':True
 }
 
 postData = urllib.parse.urlencode(postDict).encode()
-op = opener.open(url, postData)
+op = opener.open(url,postData)
 data = op.read()
 data = ungzip(data)
 
-print(data.decode(()))
+print(data.decode())
