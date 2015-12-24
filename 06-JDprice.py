@@ -7,6 +7,7 @@
 '''
 import urllib.request
 import re
+import xlwt
 
 # 通过京东移动接口  
 # 参数url：京东原本的商品网址  
@@ -32,21 +33,22 @@ def get_jd_price(id):
     
     # 提取出商品价格
     # 匹配时指定re.S可以让点匹配所有字符，包括换行符
-    m = re.search(r'<div class="prod-price">.*?<span>(.*?)</span>(.*?)</div>',html,re.S)
+    m = re.search(r'<div class="prod-price">.*?<span>(.*?)</span>([^\s]*).*</div>',html,re.S)
     if m:
         jdprice = m.group(2)
     
     print('商品ID：%s' % jdid)
     print('商品名称：%s' % jdname)
     print('商品价格：%s' % jdprice)
+    return {'jdid':jdid,'jdname':jdname,'jdprice':jdprice}
 
-id = 1119429
-get_jd_price(id)
-
-for x in range(1,10):
-    id = 1119452 + x
+if __name__ != '__main__':
+    id = 1119429
     get_jd_price(id)
-
+    
+    for x in range(1,10):
+        id = 1119452 + x
+        get_jd_price(id)
 
 '''
 运行效果：
@@ -71,3 +73,36 @@ for x in range(1,10):
 商品名称：麦富迪 狗粮 金毛专用成犬粮10kg  
 商品价格：
 '''
+
+
+'''
+将价格结果存入Excel
+'''
+# 生成a,b两个jdid之间的List
+def get_jd_price_list(a, b):
+    jd_list = []
+    for x in range(a, b):
+        jd_list.append(get_jd_price(x))
+    return jd_list 
+
+# 生成a,b两个jdid之间的Excel
+def get_jd_price_excel(a,b):
+    wbk = xlwt.Workbook()
+    sheet = wbk.add_sheet('sheet 1')
+    sheet.write(0,0,'number')
+    sheet.write(0,1,'jdid')
+    sheet.write(0,2,'jdname')
+    sheet.write(0,3,'jdprice')
+    jd_lists = get_jd_price_list(a,b)
+    for x in range(len(jd_lists)):
+        sheet.write(x+1, 0, x+1)
+        sheet.write(x+1, 1, jd_lists[x].get('jdid'))
+        sheet.write(x+1, 2, jd_lists[x].get('jdname'))
+        sheet.write(x+1, 3, jd_lists[x].get('jdprice'))
+    wbk.save('result//06-JDprice//jdprice'+str(a)+'-'+str(b)+'.xls')
+    print('生成 Excel 成功！')
+
+
+if __name__ == '__main__':
+    get_jd_price_excel(1119452,1119500)
+    

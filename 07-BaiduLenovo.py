@@ -9,8 +9,8 @@ def get_baidu_lenovo(codeStr):
     pass
     # urllib的quote()方法控制对特殊字符的URL编码
     # 如将"百度"编码为"%E7%99%BE%E5%BA%A6"
-    gjc = urllib.request.quote(codeStr)
-    url = 'http://suggestion.baidu.com/su?wd=' + gjc + '&json=1&p=3&sid=&cb=jQuery110205425511478908079_1396251136074&_=1396251136078'  
+    gjc = urllib.request.quote(codeStr) 
+    url = 'http://suggestion.baidu.com/su?wd=' + gjc  
     headers = {  
         'User-Agent':'Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.6) Gecko/20091201 Firefox/3.5.6',  
         'Accept' : '*/*',  
@@ -19,7 +19,7 @@ def get_baidu_lenovo(codeStr):
     
     req = urllib.request.Request(url, headers=headers)
     html = urllib.request.urlopen(req).read().decode('gbk')
-    lenovoStr = re.search(r'"s":\[(.*?)\]', html).group(1)
+    lenovoStr = re.search(r's:\[(.*?)\]', html).group(1)
     print('“%s”的理想词为：%s' % (codeStr, lenovoStr))
 
 codelist = ['百度','谷歌','GitHub','老罗','韩寒','%']
