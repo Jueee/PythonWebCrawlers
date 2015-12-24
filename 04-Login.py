@@ -129,4 +129,12 @@ op = opener.open(url,postData)
 data = op.read()
 data = ungzip(data)
 
-print(data.decode())
+
+
+returnStr =  data.decode()
+returnDict = eval(returnStr) # 字符串转 dict
+print(returnDict)
+
+print()
+for d,x in returnDict.items():
+    print('字典代码：%s，字典值：%s' % (d,x))
