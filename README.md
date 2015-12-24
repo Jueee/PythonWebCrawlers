@@ -10,3 +10,4 @@
 + 04-Login.py：模拟用户登录。
 + 05-tieba.py：爬取百度贴吧的HTML网页到本地。
 + 06-JDprice.py：爬虫获取京东的商品价格。
++ 07-BaiduLenovo.py：百度搜索框理想词的获取。

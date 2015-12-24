@@ -14,6 +14,7 @@ import urllib.request
 import http.cookiejar
 import urllib
 from collections import deque
+import datetime
 
 
 '''
@@ -96,6 +97,15 @@ if __name__ != '__main__':
 
 
 '''
+
+'''
+if __name__!='__main__':
+
+    data = urllib.request.urlopen('http://baidu.com').read()
+    print(data)
+
+
+'''
 保存抓回来的报文
 
 Python 的文件操作还是相当方便的. 
@@ -103,28 +113,20 @@ Python 的文件操作还是相当方便的.
 改动一下打开文件的方式就能用不同的姿势保存文件了. 
 下面是参考代码:
 '''
-def saveFile(data):
-    save_path = 'result\\01-Study\\study.txt'
-    f_obj = open(save_path, 'a') # wb 表示打开方式
+def get_log(data,fileName='study'):
+    save_path = 'result\\01-Chrome\\'+fileName+'.txt'
+    f_obj = open(save_path, 'a+') # wb 表示打开方式  a 表示追加
     f_obj.write(data)
     f_obj.close()
 
-
-'''
-
-'''
-if __name__=='__main__':
-    result = ''
-
-    data = urllib.request.urlopen('http://baidu.com').read()
-    print(data)
     
     
+def get_url_deque(url):
+    fileName = re.search(r'://(.*)', url).group(1).replace('/','-')
     queue = deque()
     visited = set()
-    
-    url = 'http://www.jueee.site/'  # 入口页面, 可以换成别的
-    
+    get_log('开始抓取：%s\n' % url,fileName)
+    starttime = datetime.datetime.now()
     queue.append(url)
     cnt = 0
     
@@ -132,7 +134,7 @@ if __name__=='__main__':
         url = queue.popleft()   # 队首元素出队
         visited |= {url}        # 标记为已访问
     
-        result += '已经抓取：'+str(cnt)+'正在抓取<---'+url + '\n'
+        get_log('已经抓取：'+str(cnt)+'正在抓取<---'+url + '\n',fileName)
     
         req = urllib.request.Request(url)
         req.add_header('User-Agent', 'Mozilla/6.0 (iPhone; CPU iPhone OS 8_0 like Mac OS X) AppleWebKit/536.26 (KHTML, like Gecko) Version/8.0 Mobile/10A5376e Safari/8536.25')
@@ -158,6 +160,12 @@ if __name__=='__main__':
         for x in linkre.findall(data):
             if 'http' in x and x not in visited:
                 queue.append(x)
-                result += '加入队列 --->  ' + x + '\n'
-    print(result)
-    saveFile(result)
+                get_log('加入队列 --->  ' + x + '\n',fileName)
+    endtime = datetime.datetime.now()
+    get_log('抓取完毕！共耗时：%s.seconds \n' % (endtime - starttime),fileName)
+
+if __name__=='__main__':
+    url = 'https://github.com/Jueee/04-LiaoXueFeng'  # 入口页面, 可以换成别的
+    get_url_deque(url)
+    
+    
