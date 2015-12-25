@@ -44,18 +44,22 @@ if __name__ != '__main__':
 
 
 '''
-使用正则表达式获取 _xsrf 的值.
+使用正则表达式获取 lt 和 execution 的值.
 
-我们在第一遍 GET 的时候可以从响应报文中的 HTML 代码里面得到这个 _xsrf 的值. 
-如下函数实现了这个功能, 返回的 str 就是 _xsrf 的值.
+我们在第一遍 GET 的时候可以从响应报文中的 HTML 代码里面得到这个 lt 和 execution 的值. 
+如下函数实现了这个功能, 返回的 str 就是 lt 和 execution 的值.
 '''
 import re
 
-def getXSRF(data):
-    cer = re.compile('name=\"_xsrf\" value=\"(.*)\"', flags = 0)
+def getLT(data):
+    cer = re.compile('name=\"lt\" value=\"(.*)\"', flags = 0)
     strlist = cer.findall(data)
     return strlist[0]
 
+def getExecution(data):
+    cer = re.compile('name=\"execution\" value=\"(.*)\"', flags = 0)
+    strlist = cer.findall(data)
+    return strlist[0]
 '''
 发射 POST !!
 
@@ -104,37 +108,46 @@ header = {
     'DNT': '1'
 }
 
-url ='http://www.zhihu.com/'
+url ='https://passport.csdn.net'
 opener = getOpener(header)
 op = opener.open(url)
 data = op.read()
 data = ungzip(data)
 
 
-_xsrf = getXSRF(data.decode())
-print(_xsrf)
+lt = getLT(data.decode())
+print(lt)
+execution = getExecution(data.decode())
+print(execution)
 
-url += 'login/email'
+url += '/account/login'
 id = '921550356@qq.com'
-password = 'aa'
+password = 'xxxxxxx'
 postDict = {
-    '_xsrf':'2dfc9ed9eb9bfd4bd8d89903272708df',
-    'email':id,
+    'ref':'toolbar',
+    'username':id,
     'password':password,
-    'remember_me':True
+    'lt':lt,
+    'execution':execution,
+    '_eventId':'submit'
 }
 
 postData = urllib.parse.urlencode(postDict).encode()
+print('postData',postData)
 op = opener.open(url,postData)
+print('op',op)
 data = op.read()
 data = ungzip(data)
 
 
 
 returnStr =  data.decode()
-returnDict = eval(returnStr) # 字符串转 dict
-print(returnDict)
+try:
+    returnDict = eval(returnStr) # 字符串转 dict
+    for d,x in returnDict.items():
+        print('字典代码：%s，字典值：%s' % (d,x))
+except :
+    pass
 
-print()
-for d,x in returnDict.items():
-    print('字典代码：%s，字典值：%s' % (d,x))
+print(returnStr)
+
