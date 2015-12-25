@@ -5,7 +5,6 @@ http://www.yiibai.com/python/python3-webbug-series2.html
 '''
 Python的队列
 
-
 在爬虫程序中, 用到了广度优先搜索(BFS)算法. 这个算法用到的数据结构就是队列.
 
 Python的List功能已经足够完成队列的功能, 可以用 append() 来向队尾添加元素, 可以用类似数组的方式来获取队首元素, 可以用 pop(0) 来弹出队首元素. 
