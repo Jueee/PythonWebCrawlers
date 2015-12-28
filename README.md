@@ -10,5 +10,6 @@
 + 04-Login.py：模拟用户登录（以登录 CSDN 网站为例）。
 + 05-tieba.py：爬取百度贴吧的HTML网页到本地。
 + 06-JDprice.py：爬虫获取京东的商品价格，并把爬取结果保存至Excel。
-+ 07-BaiduLenovo.py：百度搜索框理想词的获取。
-+ 
++ 07-BaiduLenovo.py：百度搜索框联想词的获取。
++ 08-IdentifyingCode.py：读取验证码图片。
++ 09-downPicture.py：爬取某个网页上的所有图片资源。
