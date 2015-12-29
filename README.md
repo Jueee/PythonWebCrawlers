@@ -15,3 +15,4 @@
 + 09-downPicture.py：爬取某个网页上的所有图片资源。
 + 10-zhihuLogin.py：知乎网的登录。
 + 11-CSDNBlogList.py：根据用户名，获取该用户的CSDN的博客列表。
++ 12-ChromeCookie.py：在Python中使用Chrome浏览器已有的Cookies发起HTTP请求。
