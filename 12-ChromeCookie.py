@@ -1,5 +1,7 @@
 '''
 在Python中使用Chrome浏览器已有的Cookies发起HTTP请求。
+
+参考博客：http://www.lijiejie.com/python-http-request-with-chrome-cookies/
 '''
 '''
 Chrome的Cookies文件保存路径类似于:
