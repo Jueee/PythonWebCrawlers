@@ -17,3 +17,4 @@
 + 11-CSDNBlogList.py：根据用户名，获取该用户的CSDN的博客列表。
 + 12-ChromeCookie.py：在Python中使用Chrome浏览器已有的Cookies发起HTTP请求。
 + 13-CookieDeciphering.py：Chrome 33+浏览器 Cookies encrypted_value 解密。
++ 14-ChromePassword.py：获取Chrome浏览器已保存的账号和密码。
