@@ -4,16 +4,12 @@
 '''
 
 '''
-from selenium import webdriver
-from selenium.common.exceptions import NoSuchElementException
-from selenium.webdriver.common.keys import Keys
 import ChromeCookies
 import requests
 import re,time,os
 
 
-ZHIHU_URL = 'https://www.zhihu.com'
-USER_NAMBER = '2545804394'
+USER_NAMBER = '1800591743'      # 微博ID，如“1955032717”
 
 targetDir = 'result\\18-WeiboAnalbum.py\\'+USER_NAMBER    #文件保存路径  
 
