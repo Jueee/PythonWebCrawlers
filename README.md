@@ -18,4 +18,7 @@
 + 12-ChromeCookie.py：在Python中使用Chrome浏览器已有的Cookies发起HTTP请求。
 + 13-CookieDeciphering.py：Chrome 33+浏览器 Cookies encrypted_value 解密。
 + 14-ChromePassword.py：获取Chrome浏览器已保存的账号和密码。
-+ 15-ZhihuAnswerList.py：获取某个用户的知乎回答列表及赞同数。
++ 15-ZhihuAnswerList.py：获取某个用户的知乎回答列表及赞同数（静态网页爬虫）。
++ 16-selenium.py：动态爬虫工具 selenium 的安装与使用（通过控制浏览器实现）。
++ 17-Phantomjs.py：动态爬虫工具 Phantomjs 的安装与使用（通过JS渲染实现）。
++ 18-WeiboAnalbum.py：爬取新浪微博某个用户的头像相册（通过分析API JSON）。
