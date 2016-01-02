@@ -9,7 +9,7 @@ import requests
 import re,time,os
 
 
-USER_NAMBER = '1800591743'      # 微博ID，如“1955032717”
+USER_NAMBER = '2418838380'      # 微博ID，如“1955032717”
 
 targetDir = 'result\\18-WeiboAnalbum.py\\'+USER_NAMBER    #文件保存路径  
 
@@ -18,10 +18,11 @@ def destFile(path,name=''):
     if not os.path.isdir(targetDir):
         os.mkdir(targetDir)
     pos = path.rindex('/')
+    pom = path.rindex('.')
     if name=='':
         t = os.path.join(targetDir, path[pos+1:])
     else:
-        t = os.path.join(targetDir, name)
+        t = os.path.join(targetDir, name + '.' + path[pom+1:])
     return t
 
 # 保存图片
@@ -54,7 +55,9 @@ if __name__=='__main__':
         response = requests.get(get_url, cookies=cookies)
 
         html_doc = response.text.encode('gbk','ignore').decode('gbk')
+        m = 0
         for match in re.finditer(r'"pic_name":"(.*?)"', html_doc,re.S):
+            m = m + 1
             picture = match.group(1)
             pictureurl = 'http://ww3.sinaimg.cn/mw690/'+picture
-            saveImage(pictureurl)
+            saveImage(pictureurl, str(m+n*20).zfill(4))
