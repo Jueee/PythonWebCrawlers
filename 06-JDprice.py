@@ -9,13 +9,22 @@ import urllib.request
 import re
 import xlwt
 
+class JDGoods(object):
+    jdid = ''
+    jdname = ''
+    jdprice = ''
+    def __init__(self):
+        super(JDGoods, self).__init__()
+        
+
 # 通过京东移动接口  
 # 参数url：京东原本的商品网址  
 def get_jd_price(id):
+    jdGoods = JDGoods()
     url = 'http://item.jd.com/'+str(id)+'.html'        #原本的网址 
-    jdid = re.search(r'/(\d+)\.html', url).group(1)      #原本的网址提取出商品ID
+    jdGoods.jdid = re.search(r'/(\d+)\.html', url).group(1)      #原本的网址提取出商品ID
     
-    url = 'http://m.jd.com/product/'+jdid+'.html'   #转换成为移动商城的url  
+    url = 'http://m.jd.com/product/'+jdGoods.jdid+'.html'   #转换成为移动商城的url  
     #通过对源代码进行utf-8解码  
     html = urllib.request.urlopen(url).read().decode('utf-8')
     
@@ -29,18 +38,18 @@ def get_jd_price(id):
     # 提取商品名称
     m = re.search(r'<span class="title-text">(.*?)<i.*?/i></span>',html,re.S)
     if m:
-        jdname = m.group(1)
+        jdGoods.jdname = m.group(1)
     
     # 提取出商品价格
     # 匹配时指定re.S可以让点匹配所有字符，包括换行符
     m = re.search(r'<div class="prod-price">.*?<span>(.*?)</span>([^\s]*).*</div>',html,re.S)
     if m:
-        jdprice = m.group(2)
+        jdGoods.jdprice = m.group(2)
     
-    print('商品ID：%s' % jdid)
-    print('商品名称：%s' % jdname)
-    print('商品价格：%s' % jdprice)
-    return {'jdid':jdid,'jdname':jdname,'jdprice':jdprice}
+    print('商品ID：%s' % jdGoods.jdid)
+    print('商品名称：%s' % jdGoods.jdname)
+    print('商品价格：%s' % jdGoods.jdprice)
+    return jdGoods
 
 if __name__ != '__main__':
     id = 1119429
@@ -95,14 +104,15 @@ def get_jd_price_excel(a,b):
     sheet.write(0,3,'jdprice')
     jd_lists = get_jd_price_list(a,b)
     for x in range(len(jd_lists)):
+        jdGoods = jd_lists[x]
         sheet.write(x+1, 0, x+1)
-        sheet.write(x+1, 1, jd_lists[x].get('jdid'))
-        sheet.write(x+1, 2, jd_lists[x].get('jdname'))
-        sheet.write(x+1, 3, jd_lists[x].get('jdprice'))
+        sheet.write(x+1, 1, jdGoods.jdid)
+        sheet.write(x+1, 2, jdGoods.jdname)
+        sheet.write(x+1, 3, jdGoods.jdprice)
     wbk.save('result//06-JDprice//jdprice'+str(a)+'-'+str(b)+'.xls')
     print('生成 Excel 成功！')
 
 
 if __name__ == '__main__':
-    get_jd_price_excel(1119452,1119500)
+    get_jd_price_excel(1119450,1119550)
     
