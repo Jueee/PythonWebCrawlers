@@ -23,4 +23,5 @@
 + 17-Phantomjs.py：动态爬虫工具 Phantomjs 的安装与使用（通过JS渲染实现）。
 + 18-WeiboAnalbum.py：爬取新浪微博某个用户的头像相册（通过分析API JSON）。
 + 19-BeautifulSoup.py：Beautiful Soup 学习笔记(python3中的爬虫匹配神器)。
-+ 20-DoubanMovieTop250.py：爬取豆瓣评分最高的250部电影。
++ 20-DoubanMovieTop250.py：爬取豆瓣评分最高的250部电影(使用Beautiful Soup)。
++ 21-DoubanMovieTypeTop.py：按类别爬取豆瓣评分最高的电影(使用Beautiful Soup)。

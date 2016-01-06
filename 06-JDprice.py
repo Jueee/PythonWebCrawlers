@@ -96,8 +96,8 @@ def get_jd_price_list(a, b):
 
 # 生成a,b两个jdid之间的Excel
 def get_jd_price_excel(a,b):
-    wbk = xlwt.Workbook()
-    sheet = wbk.add_sheet('sheet 1')
+    wbk = xlwt.Workbook(encoding = 'utf-8')
+    sheet = wbk.add_sheet('sheet 1', cell_overwrite_ok=True)
     sheet.write(0,0,'number')
     sheet.write(0,1,'jdid')
     sheet.write(0,2,'jdname')

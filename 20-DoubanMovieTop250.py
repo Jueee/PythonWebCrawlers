@@ -1,3 +1,8 @@
+'''
+爬取豆瓣评分最高的250部电影(使用Beautiful Soup)
+
+'''
+
 import urllib.request
 from bs4 import BeautifulSoup
 import xlwt
@@ -5,7 +10,14 @@ import xlwt
 MOVIE_TOP250 = 'http://movie.douban.com/top250?start='
 
 class Movie(object):
-    
+    id = '0'
+    title = ''
+    url = ''
+    year = ''
+    director = ''
+    peoples = ''
+    rating = ''
+
         
 
 def get_douban_movie(url,title=''):
@@ -46,6 +58,23 @@ def get_movie_list():
             movie_list.append(movie)
     return movie_list 
 
+def get_movie_top250():
+    movie_list = []
+    for i in range(10):
+        top250html = urllib.request.urlopen(MOVIE_TOP250+str(i*25)).read().decode().encode('gbk','ignore').decode('gbk')
+        soup = BeautifulSoup(top250html, "lxml")
+        itemlist = soup.find_all('div', class_='pic')
+        for i in range(len(itemlist)):
+            movie = Movie()
+            soupitem = BeautifulSoup(repr(itemlist[i]), "lxml")
+            movie.id = soupitem.find('em').string
+            movie.url = soupitem.a['href']
+            movie.title = soupitem.img['alt']
+            movie.rating = soup.find('span', class_='rating_num').string
+            movie_list.append(movie)
+            print(movie.id,movie.rating,movie.title,movie.url)
+    return movie_list
+
 # 生成a,b两个jdid之间的Excel
 def get_movie_list_excel():
     wbk = xlwt.Workbook()
@@ -78,6 +107,8 @@ def get_movie_list_excel():
     print('生成 Excel 成功！')
 
 
-if __name__ == '__main__':
+if __name__ != '__main__':
     get_movie_list_excel()
     
+if __name__ == '__main__':
+    get_movie_top250()
