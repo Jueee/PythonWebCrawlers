@@ -25,3 +25,4 @@
 + 19-BeautifulSoup.py：Beautiful Soup 学习笔记(python3中的爬虫匹配神器)。
 + 20-DoubanMovieTop250.py：爬取豆瓣评分最高的250部电影(使用Beautiful Soup)。
 + 21-DoubanMovieTypeTop.py：按类别爬取豆瓣评分最高的电影(使用Beautiful Soup)。
++ 22-PyQuery.py：Python中PyQuery库的使用总结。
