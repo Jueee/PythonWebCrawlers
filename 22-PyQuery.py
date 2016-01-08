@@ -1,6 +1,8 @@
 '''
 Python中PyQuery库的使用总结
 
+
+pyquery库是jQuery的Python实现，可以用于解析HTML网页内容
 '''
 
 from pyquery import PyQuery as pq
