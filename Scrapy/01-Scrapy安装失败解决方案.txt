@@ -1,0 +1,60 @@
+E:\360\Python\PythonCode\05-WebCrawlers\Scrapy>Scrapy
+Traceback (most recent call last):
+  File "C:\ProgramFile\Python34\Scripts\scrapy-script.py", line 9, in <module>
+    load_entry_point('Scrapy==1.0.4', 'console_scripts', 'scrapy')()
+  File "C:\ProgramFile\Python34\lib\site-packages\scrapy\cmdline.py", line 122,
+in execute
+    cmds = _get_commands_dict(settings, inproject)
+  File "C:\ProgramFile\Python34\lib\site-packages\scrapy\cmdline.py", line 46, i
+n _get_commands_dict
+    cmds = _get_commands_from_module('scrapy.commands', inproject)
+  File "C:\ProgramFile\Python34\lib\site-packages\scrapy\cmdline.py", line 29, i
+n _get_commands_from_module
+    for cmd in _iter_command_classes(module):
+  File "C:\ProgramFile\Python34\lib\site-packages\scrapy\cmdline.py", line 21, i
+n _iter_command_classes
+    for obj in vars(module).itervalues():
+AttributeError: 'dict' object has no attribute 'itervalues'
+
+
+
+将“C:\ProgramFile\Python34\lib\site-packages\scrapy\cmdline.py”文件中，第21行：
+    for obj in vars(module).itervalues():
+修改为：
+    for obj in vars(module).values():
+
+则安装成功！    
+
+E:\360\Python\PythonCode\05-WebCrawlers\Scrapy>Scrapy
+Scrapy 1.0.4 - no active project
+
+Usage:
+  scrapy <command> [options] [args]
+
+Available commands:
+  bench         Run quick benchmark test
+  commands
+  fetch         Fetch a URL using the Scrapy downloader
+  runspider     Run a self-contained spider (without creating a project)
+  settings      Get settings values
+  shell         Interactive scraping console
+  startproject  Create new project
+  version       Print Scrapy version
+  view          Open URL in browser, as seen by Scrapy
+
+  [ more ]      More commands available when run from project directory
+
+Use "scrapy <command> -h" to see more info about a command
+
+E:\360\Python\PythonCode\05-WebCrawlers\Scrapy>
+
+
+
+
+
+【注】
+As you are in python3 , use dict.items() instead of dict.iteritems()
+iteritems() was removed in python3, so you can't use this method anymore.
+
+Removed dict.iteritems(), dict.iterkeys(), and dict.itervalues().
+Instead: use dict.items(), dict.keys(), and dict.values() respectively.

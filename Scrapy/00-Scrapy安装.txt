@@ -1,0 +1,32 @@
+pip install Scrapy
+
+安装前需保证：
+1、Python 2.7
+2、Python Package: pip and setuptools. 现在 pip 依赖 setuptools ，如果未安装，则会自动安装 setuptools 。
+3、lxml. 大多数Linux发行版自带了lxml。如果缺失，请查看http://lxml.de/installation.html
+4、OpenSSL. 除了Windows(请查看 平台安装指南)之外的系统都已经提供。
+
+
+若，则安装成功：
+E:\360\Python\PythonCode\05-WebCrawlers\Scrapy>Scrapy
+Scrapy 1.0.4 - no active project
+
+Usage:
+  scrapy <command> [options] [args]
+
+Available commands:
+  bench         Run quick benchmark test
+  commands
+  fetch         Fetch a URL using the Scrapy downloader
+  runspider     Run a self-contained spider (without creating a project)
+  settings      Get settings values
+  shell         Interactive scraping console
+  startproject  Create new project
+  version       Print Scrapy version
+  view          Open URL in browser, as seen by Scrapy
+
+  [ more ]      More commands available when run from project directory
+
+Use "scrapy <command> -h" to see more info about a command
+
+E:\360\Python\PythonCode\05-WebCrawlers\Scrapy>

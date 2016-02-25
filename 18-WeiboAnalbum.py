@@ -9,7 +9,7 @@ import requests
 import re,time,os
 
 
-USER_NAMBER = '2418838380'      # 微博ID，如“1955032717”
+USER_NAMBER = '2088407893'      # 微博ID，如“1955032717”
 
 targetDir = 'result\\18-WeiboAnalbum.py\\'+USER_NAMBER    #文件保存路径  
 
