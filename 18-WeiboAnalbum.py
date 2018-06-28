@@ -9,14 +9,14 @@ import requests
 import re,time,os
 
 
-USER_NAMBER = '2088407893'      # 微博ID，如“1955032717”
+USER_NAMBER = '5234257700'      # 微博ID，如“1955032717”
 
 targetDir = 'result\\18-WeiboAnalbum.py\\'+USER_NAMBER    #文件保存路径  
 
 # 获取保存路径
 def destFile(path,name=''):
     if not os.path.isdir(targetDir):
-        os.mkdir(targetDir)
+        os.makedirs(targetDir)
     pos = path.rindex('/')
     pom = path.rindex('.')
     if name=='':
